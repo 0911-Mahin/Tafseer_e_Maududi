@@ -8,5 +8,6 @@ from .models import Chapter
 
 
 class ChapterViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'surah_number'
     queryset = Chapter.objects.all()
     serializer_class = ChapterSerializer
