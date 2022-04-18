@@ -49,10 +49,26 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'API.throttling.ByHourRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'hour': '60/hour'
+    },
+    'ROOT_THROTTLE_RATES': {
+        'hour': '3600/hour',
+    },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'E:/Computer_Science_Studies/Python/Python_Web_Projects/Django/Tafseer_e_Maududi/Cache/'
+    }
 }
 
 MIDDLEWARE = [
