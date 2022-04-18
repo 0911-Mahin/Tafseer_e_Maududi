@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Quran API
+  version: 1.0.0
+  description: An API providing data of Quran
+paths:
+  /api/chapters/:
+    get:
+      operationId: api_chapters_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedChapterList'
+          description: ''
+  /api/chapters/{surah_number}/:
+    get:
+      operationId: api_chapters_retrieve
+      parameters:
+      - in: path
+        name: surah_number
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+          description: ''
+components:
+  schemas:
+    Chapter:
+      type: object
+      properties:
+        detail:
+          type: string
+          format: uri
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        surah_number:
+          type: integer
+        name:
+          type: string
+          maxLength: 32
+        verses:
+          type: integer
+        revelation_place:
+          type: string
+          maxLength: 16
+        revelation_order:
+          type: integer
+        translated_name:
+          type: string
+          maxLength: 64
+      required:
+      - detail
+      - id
+      - name
+      - revelation_order
+      - revelation_place
+      - surah_number
+      - translated_name
+      - verses
+    PaginatedChapterList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chapter'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
