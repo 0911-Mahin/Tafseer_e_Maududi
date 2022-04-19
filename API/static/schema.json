@@ -1,0 +1,289 @@
+﻿{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Quran API",
+    "version": "1.0.0",
+    "description": "An API providing data of Quran"
+  },
+  "paths": {
+    "/api/chapters/": {
+      "get": {
+        "operationId": "Chapter List",
+        "description": "Get list of Chapters in Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 chapters"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get chapters from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Chapters"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedChapterList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/chapters/{surah_number}/": {
+      "get": {
+        "operationId": "Chapter Item",
+        "description": "Retrive a chapter of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "surah_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Surah to get details of",
+            "required": true,
+            "examples": {
+              "Surah1": {
+                "value": 1,
+                "summary": "First Surah",
+                "description": "To Get details of first Surah in Quran"
+              },
+              "Surah2": {
+                "value": 2,
+                "summary": "Second Surah",
+                "description": "To Get details of second Surah in Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Chapters"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chapter"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Chapter": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "surah_number": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "verses": {
+            "type": "integer"
+          },
+          "revelation_place": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "revelation_order": {
+            "type": "integer"
+          },
+          "translated_name": {
+            "type": "string",
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "name",
+          "revelation_order",
+          "revelation_place",
+          "surah_number",
+          "translated_name",
+          "verses"
+        ]
+      },
+      "PaginatedChapterList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/accounts/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/accounts/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Chapter"
+            }
+          }
+        }
+      },
+      "404_Not_Found": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "string",
+            "nullable": false
+          }
+        }
+      },
+      "401_Unauthorized": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "string",
+            "nullable": false
+          }
+        }
+      },
+      "429_Throttled": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "string",
+            "nullable": false
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "sessionid"
+      },
+      "tokenAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Token-based authentication with required prefix \"Token\""
+      }
+    }
+  }
+}
