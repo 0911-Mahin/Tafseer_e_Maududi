@@ -191,7 +191,7 @@
             "type": "string",
             "maxLength": 32
           },
-          "verses": {
+          "verse_count": {
             "type": "integer"
           },
           "revelation_place": {
@@ -214,7 +214,7 @@
           "revelation_place",
           "surah_number",
           "translated_name",
-          "verses"
+          "verse_count"
         ]
       },
       "PaginatedChapterList": {
