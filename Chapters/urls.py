@@ -8,5 +8,4 @@ router.register(r'', views.ChapterViewSet, basename='chapter')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls'), name='authen'),
 ]
