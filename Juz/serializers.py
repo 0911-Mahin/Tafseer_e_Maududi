@@ -8,4 +8,4 @@ class JuzSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Juz
-        fields = ['id', 'juz_number', 'verse_count']
+        fields = ['detail', 'id', 'juz_number', 'verse_count']
