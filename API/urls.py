@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import include, path
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('juz/', include('Juz.urls')),
     path('docs/', TemplateView.as_view(
         template_name='docs.html',
     ), name='documentation'),
