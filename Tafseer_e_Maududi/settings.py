@@ -50,6 +50,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'API.throttling.ByHourRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'hour': '60/hour'
+    },
+    'ROOT_THROTTLE_RATES': {
+        'hour': '3600/hour',
+    },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
