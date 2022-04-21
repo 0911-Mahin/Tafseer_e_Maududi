@@ -8,5 +8,5 @@ class ChapterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chapter
-        fields = ['detail', 'id', 'surah_number', 'name', 'verses',
+        fields = ['detail', 'id', 'surah_number', 'name', 'verse_count',
                   'revelation_place', 'revelation_order', 'translated_name']

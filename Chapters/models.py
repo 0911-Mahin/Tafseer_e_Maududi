@@ -6,7 +6,7 @@ from django.db import models
 class Chapter(models.Model):
     surah_number = models.IntegerField()
     name = models.CharField(max_length=32)
-    verses = models.IntegerField()
+    verse_count = models.IntegerField()
     revelation_place = models.CharField(max_length=16)
     revelation_order = models.IntegerField()
     translated_name = models.CharField(max_length=64)
