@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Hizb(models.Model):
+    hizb_number = models.IntegerField()
+    verse_count = models.IntegerField
