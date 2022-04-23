@@ -194,7 +194,6 @@
                 "required": [
                     "detail",
                     "id",
-                    "name",
                     "hizb_number",
                     "verse_count"
                 ]
