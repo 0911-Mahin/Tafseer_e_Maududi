@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'API',
     'Chapters',
     'Juz',
+    'Hizb',
+    'Rub',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

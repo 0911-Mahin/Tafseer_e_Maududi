@@ -331,6 +331,332 @@
           }
         }
       }
+    },
+    "/api/hizb/": {
+      "get": {
+        "operationId": "List of Hizbs",
+        "description": "Get list of Hizbs in Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 hizbs"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get hizbs from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Hizb"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedHizbList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/hizb/{hizb_number}/": {
+      "get": {
+        "operationId": "Hizb Item",
+        "description": "Retrive a hizb of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hizb_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of hizb to get details of",
+            "required": true,
+            "examples": {
+              "Hizb 1": {
+                "value": 1,
+                "summary": "First Hizb",
+                "description": "To Get details of first Hizb in Quran"
+              },
+              "Hizb 2": {
+                "value": 2,
+                "summary": "Second Hizb",
+                "description": "To Get details of second Hizb in Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Hizb"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hizb"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/rub/": {
+      "get": {
+        "operationId": "List of Rubs",
+        "description": "Get list of Rubs in Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 Rubs"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get Rubs from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Rub"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedRubList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/rub/{rub_number}/": {
+      "get": {
+        "operationId": "Rub Item",
+        "description": "Retrive a Rub of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rub_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of rub to get details of",
+            "required": true,
+            "examples": {
+              "Hizb 1": {
+                "value": 1,
+                "summary": "First Rub",
+                "description": "To Get details of first Rub in Quran"
+              },
+              "Hizb 2": {
+                "value": 2,
+                "summary": "Second Rub",
+                "description": "To Get details of second Rub in Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Rub"
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rub"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -380,6 +706,139 @@
           "verse_count"
         ]
       },
+      "Juz": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "juz_number": {
+            "type": "integer"
+          },
+          "verse_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "juz_number",
+          "verse_count"
+        ]
+      },
+      "Hizb": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "hizb_number": {
+            "type": "integer"
+          },
+          "verse_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "hizb_number",
+          "verse_count"
+        ]
+      },
+      "Rub": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "rub_number": {
+            "type": "integer"
+          },
+          "verse_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "name",
+          "rub_number",
+          "verse_count"
+        ]
+      },
+      "PaginatedHizbList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Hizb"
+            }
+          }
+        }
+      },
+      "PaginatedRubList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rub"
+            }
+          }
+        }
+      },
       "PaginatedChapterList": {
         "type": "object",
         "properties": {
@@ -406,32 +865,6 @@
             }
           }
         }
-      },
-      "Juz": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "id": {
-            "type": "integer",
-            "readOnly": true
-          },
-          "juz_number": {
-            "type": "integer"
-          },
-          "verse_count": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "detail",
-          "id",
-          "juz_number",
-          "verse_count"
-        ]
       },
       "PaginatedJuzList": {
         "type": "object",
