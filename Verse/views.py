@@ -5,6 +5,7 @@ from rest_framework import status
 
 from Chapters.models import Chapter
 from Juz.models import Juz
+from Hizb.models import Hizb
 from .models import Verse
 from .serializers import VerseSerializer
 
@@ -34,4 +35,15 @@ class VerseViewSet(viewsets.ReadOnlyModelViewSet):
                 page, many=True, context={'request': request})
             return Response(serializer.data)
         except Juz.DoesNotExist:
+            return Response({'detail': 'Not Found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['get'], url_path=r'by_hizb/(?P<hizb_number>\d+)')
+    def by_hizb(self, request, hizb_number):
+        try:
+            hizb = Hizb.objects.get(pk=hizb_number)
+            page = self.paginate_queryset(hizb.verses.all())
+            serializer = VerseSerializer(
+                page, many=True, context={'request': request})
+            return Response(serializer.data)
+        except Hizb.DoesNotExist:
             return Response({'detail': 'Not Found.'}, status=status.HTTP_404_NOT_FOUND)
