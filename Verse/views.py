@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import Verse
+from .serializers import VerseSerializer
+
+
+class VerseViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'verse_number'
+    queryset = Verse.objects.all()
+    serializer_class = VerseSerializer
