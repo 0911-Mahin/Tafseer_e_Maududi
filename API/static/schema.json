@@ -1354,6 +1354,56 @@
           "rub"
         ]
       },
+      "Verse": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "verse_number": {
+            "type": "integer"
+          },
+          "verse_key": {
+            "type": "string"
+          },
+          "chapter": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "juz": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "hizb": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "rub": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "verse_number",
+          "verse_key",
+          "chapter",
+          "juz",
+          "hizb",
+          "rub"
+        ]
+      },
       "PaginatedHizbList": {
         "type": "object",
         "properties": {
