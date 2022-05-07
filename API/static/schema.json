@@ -37,10 +37,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -119,10 +119,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -200,10 +200,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -282,10 +282,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -363,10 +363,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -445,10 +445,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -526,10 +526,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -608,10 +608,10 @@
         ],
         "security": [
           {
-            "tokenAuth": []
+            "Token Authentication": []
           },
           {
-            "cookieAuth": []
+            "Cookie Authentication": []
           }
         ],
         "responses": {
@@ -620,6 +620,501 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Rub"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/verse/": {
+      "get": {
+        "operationId": "List of Verse",
+        "description": "Get list of Verses in Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 Verses"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get Verses from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/verse/{verse_number}/": {
+      "get": {
+        "operationId": "Verse Item",
+        "description": "Retrive a Verse of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rub_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Verse to get details of",
+            "required": true,
+            "examples": {
+              "Verse 1": {
+                "value": 1,
+                "summary": "First Verse",
+                "description": "To Get details of first Verse in Quran"
+              },
+              "Verse 2": {
+                "value": 2,
+                "summary": "Second Verse",
+                "description": "To Get details of second Verse in Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Verse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/verse/by_chapter/{chapter_number}/": {
+      "get": {
+        "operationId": "Verse List by Chapter",
+        "description": "List of Verses of a Chapter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Chapters to get Verses of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Verses of Chapter 1",
+                "description": "List of Verses of Chapter 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Verses of Chapter 2",
+                "description": "List of Verses of Chapter 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Chapters",
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/verse/by_juz/{juz_number}/": {
+      "get": {
+        "operationId": "Verse List by Juz",
+        "description": "List of Verses of a Juz",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "juz_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Juzs to get Verses of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Verses of Juz 1",
+                "description": "List of Verses of Juz 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Verses of Juz 2",
+                "description": "List of Verses of Juz 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Juzs",
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/verse/by_hizb/{hizb_number}/": {
+      "get": {
+        "operationId": "Verse List by Hizb",
+        "description": "List of Verses of a Hizb",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hizb_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Hizbs to get Verses of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Verses of Hizb 1",
+                "description": "List of Verses of Hizb 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Verses of Hizb 2",
+                "description": "List of Verses of Hizb 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Hizb",
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/verse/by_rub/{rub_number}/": {
+      "get": {
+        "operationId": "Verse List by Rub",
+        "description": "List of Verses of a Rub",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rub_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Rubs to get Verses of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Verses of Rub 1",
+                "description": "List of Verses of Rub 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Verses of Rub 2",
+                "description": "List of Verses of Rub 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Rub",
+          "Verse"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
                 }
               }
             },
@@ -785,6 +1280,56 @@
           "verse_count"
         ]
       },
+      "Verse": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "verse_number": {
+            "type": "integer"
+          },
+          "verse_key": {
+            "type": "string"
+          },
+          "chapter": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "juz": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "hizb": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "rub": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "verse_number",
+          "verse_key",
+          "chapter",
+          "juz",
+          "hizb",
+          "rub"
+        ]
+      },
       "PaginatedHizbList": {
         "type": "object",
         "properties": {
@@ -823,13 +1368,13 @@
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/api/hizb/?page=4"
+            "example": "http://api.example.org/api/rub/?page=4"
           },
           "previous": {
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/api/hizb/?page=2"
+            "example": "http://api.example.org/api/rub/?page=2"
           },
           "results": {
             "type": "array",
@@ -850,13 +1395,13 @@
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/accounts/?page=4"
+            "example": "http://api.example.org/api/chapter/?page=4"
           },
           "previous": {
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/accounts/?page=2"
+            "example": "http://api.example.org/api/chapter/?page=2"
           },
           "results": {
             "type": "array",
@@ -877,18 +1422,45 @@
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/accounts/?page=4"
+            "example": "http://api.example.org/api/juz/?page=4"
           },
           "previous": {
             "type": "string",
             "nullable": true,
             "format": "uri",
-            "example": "http://api.example.org/accounts/?page=2"
+            "example": "http://api.example.org/api/juz/?page=2"
           },
           "results": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Juz"
+            }
+          }
+        }
+      },
+      "PaginatedVerseList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/Verse/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/Verse/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Verse"
             }
           }
         }
@@ -922,12 +1494,12 @@
       }
     },
     "securitySchemes": {
-      "cookieAuth": {
+      "Cookie Authentication": {
         "type": "apiKey",
         "in": "cookie",
         "name": "sessionid"
       },
-      "tokenAuth": {
+      "Token Authentication": {
         "type": "apiKey",
         "in": "header",
         "name": "Authorization",
