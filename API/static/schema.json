@@ -1504,6 +1504,11 @@
             "type": "string",
             "format": "uri",
             "readOnly": true
+          },
+          "translation": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
           }
         },
         "required": [
