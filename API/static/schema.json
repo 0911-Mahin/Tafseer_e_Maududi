@@ -1152,6 +1152,169 @@
           }
         }
       }
+    },
+    "/api/translation/": {
+      "get": {
+        "operationId": "Translation List",
+        "description": "Get list of Translation in Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 translation"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get translation from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Translation"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedVerseList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/translation/{id}/": {
+      "get": {
+        "operationId": "Translation Item",
+        "description": "Retrive a translation of ayah in Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Id of Translation to get translation",
+            "required": true,
+            "examples": {
+              "Ayah 1": {
+                "value": 1,
+                "summary": "First Ayah",
+                "description": "To Get translation of first ayah in Quran"
+              },
+              "Ayah 2": {
+                "value": 2,
+                "summary": "Second Ayah",
+                "description": "To Get translation of second ayah in Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Translation"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Translation"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1354,7 +1517,7 @@
           "rub"
         ]
       },
-      "Verse": {
+      "Translation": {
         "type": "object",
         "properties": {
           "detail": {
@@ -1366,42 +1529,20 @@
             "type": "integer",
             "readOnly": true
           },
-          "verse_number": {
-            "type": "integer"
+          "verse": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
           },
-          "verse_key": {
+          "translation": {
             "type": "string"
-          },
-          "chapter": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "juz": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "hizb": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "rub": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
           }
         },
         "required": [
           "detail",
           "id",
-          "verse_number",
-          "verse_key",
-          "chapter",
-          "juz",
-          "hizb",
-          "rub"
+          "verse",
+          "translation"
         ]
       },
       "PaginatedHizbList": {
@@ -1535,6 +1676,33 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Verse"
+            }
+          }
+        }
+      },
+      "PaginatedTranslationList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/hizb/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Translation"
             }
           }
         }
