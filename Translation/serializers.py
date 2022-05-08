@@ -16,7 +16,7 @@ class TranslationSerializer(serializers.ModelSerializer):
 
     def get_translation(self, translation):
         trans_text = ''
-        with open(translation.translation, 'r') as f:
+        with open(translation.translation, 'r', encoding='UTF-8') as f:
             trans_text = f.read()
         return trans_text
 
