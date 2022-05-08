@@ -11,6 +11,7 @@ class VerseSerializer(serializers.ModelSerializer):
     juz = serializers.SerializerMethodField('get_juz')
     hizb = serializers.SerializerMethodField('get_hizb')
     rub = serializers.SerializerMethodField('get_rub')
+    translation = serializers.SerializerMethodField('get_translation')
 
     def get_chapter(self, verse):
         request = self.context.get('request')
@@ -28,7 +29,11 @@ class VerseSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         return request.build_absolute_uri(reverse('rub-detail', kwargs={'rub_number': verse.rub.id}))
 
+    def get_translation(self, verse):
+        request = self.context.get('request')
+        return request.build_absolute_uri(reverse('translation-detail', kwargs={'id': verse.translation.get().id}))
+
     class Meta:
         model = Verse
         fields = ['detail', 'id', 'verse_number',
-                  'verse_key', 'chapter', 'juz', 'hizb', 'rub']
+                  'verse_key', 'chapter', 'juz', 'hizb', 'rub', 'translation']

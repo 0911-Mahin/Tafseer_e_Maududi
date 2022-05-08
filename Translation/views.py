@@ -5,5 +5,6 @@ from .serializers import TranslationSerializer
 
 
 class TranslationViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'id'
     queryset = Translation.objects.all()
     serializer_class = TranslationSerializer
