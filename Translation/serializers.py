@@ -15,9 +15,9 @@ class TranslationSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(reverse('verse-detail', kwargs={'verse_number': translation.verse.verse_number}))
 
     def get_translation(self, translation):
-        trans_text = ''
-        with open(translation.translation, 'r', encoding='UTF-8') as f:
-            trans_text = f.read()
+        f = translation.translation.open()
+        trans_text = f.read()
+        f.close()
         return trans_text
 
     class Meta:
