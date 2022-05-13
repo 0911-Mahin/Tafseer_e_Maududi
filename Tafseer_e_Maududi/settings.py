@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Hizb',
     'Rub',
     'Verse',
+    'Ayah',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
