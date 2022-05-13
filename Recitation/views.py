@@ -14,4 +14,4 @@ class RecitationViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=['get'])
     def audio(self, request, id):
         recitation = self.get_object()
-        return FileResponse(recitation.recitation.open())
+        return FileResponse(recitation.audio.open())
