@@ -7,6 +7,7 @@ urlpatterns = [
     path('hizb/', include('Hizb.urls')),
     path('rub/', include('Rub.urls')),
     path('verse/', include('Verse.urls')),
+    path('tafseer/', include('Tafseer.urls')),
     path('docs/', TemplateView.as_view(
         template_name='docs.html',
     ), name='documentation'),
