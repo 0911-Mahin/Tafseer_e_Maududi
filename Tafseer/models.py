@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+from Verse.models import Verse
+
+
+class Tafseer(models.Model):
+    text = models.CharField(max_length=1000)
+    verses = models.ManyToManyField(Verse, related_name='tafseer')
