@@ -1152,6 +1152,498 @@
           }
         }
       }
+    },
+    "/api/tafseer/text/": {
+      "get": {
+        "operationId": "List of Tafseer",
+        "description": "Get list of Tafseers of Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 Tafseers"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get Tafseers from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Tafseer"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedTafseerList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/tafseer/text/{pk}/": {
+      "get": {
+        "operationId": "Tafseer Item",
+        "description": "Retrive a Tafseer of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pk",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Tafseer to get details of",
+            "required": true,
+            "examples": {
+              "Tafseer 1": {
+                "value": 1,
+                "summary": "First Tafseer",
+                "description": "To Get details of first Tafseer of Quran"
+              },
+              "Tafseer 2": {
+                "value": 2,
+                "summary": "Second Tafseer",
+                "description": "To Get details of second Tafseer of Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Tafseer"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tafseer"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/tafseer/text/by_chapter/{chapter_number}/": {
+      "get": {
+        "operationId": "Tafseer List by Chapter",
+        "description": "List of Tafseer of a Chapter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Chapter to get Tafseer of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Tafseer of Chapter 1",
+                "description": "List of Tafseers of Chapter 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Tafseer of Chapter 2",
+                "description": "List of Tafseers of Chapter 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Chapters",
+          "Tafseer"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedTafseerList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/tafseer/intro/": {
+      "get": {
+        "operationId": "List of Intros",
+        "description": "Get list of Intros of IntrosTafseers of Quran",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "A page number within the paginated result set.",
+            "examples": {
+              "Page1": {
+                "value": 1,
+                "summary": "First 10 results",
+                "description": "To Get First 10 Intros"
+              },
+              "Page2": {
+                "value": 2,
+                "summary": "From results 10 to 20",
+                "description": "To Get Intros from 10 to 20"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Intro"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedIntroList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Page Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/tafseer/intro/{pk}/": {
+      "get": {
+        "operationId": "Intro Item",
+        "description": "Retrive a Intro of Tafseers of Quran",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pk",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Intro to get details of",
+            "required": true,
+            "examples": {
+              "Intro 1": {
+                "value": 1,
+                "summary": "First Intro",
+                "description": "To Get details of first Intro of Quran"
+              },
+              "Intro 2": {
+                "value": 2,
+                "summary": "Second Intro",
+                "description": "To Get details of second Intro of Quran"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Intro"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Intro"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
+    },
+    "/api/tafseer/intro/by_chapter/{chapter_number}/": {
+      "get": {
+        "operationId": "Intros List by Chapter",
+        "description": "List of Intros of a Chapter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_number",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of Chapter to get Intro of",
+            "required": true,
+            "examples": {
+              "Example 1": {
+                "value": 1,
+                "summary": "Intro of Chapter 1",
+                "description": "List of Intros of Chapter 1"
+              },
+              "Example 2": {
+                "value": 2,
+                "summary": "Intro of Chapter 2",
+                "description": "List of Intros of Chapter 2"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Chapters",
+          "Intro"
+        ],
+        "security": [
+          {
+            "Token Authentication": []
+          },
+          {
+            "Cookie Authentication": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedIntroList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401_Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized. Authorization Credentials not Provided."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404_Not_Found"
+                }
+              }
+            },
+            "description": "Item Not Found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/429_Throttled"
+                }
+              }
+            },
+            "description": "Throttled. Rate limit exceeded."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1354,7 +1846,7 @@
           "rub"
         ]
       },
-      "Verse": {
+      "Tafseer": {
         "type": "object",
         "properties": {
           "detail": {
@@ -1366,28 +1858,21 @@
             "type": "integer",
             "readOnly": true
           },
-          "verse_number": {
-            "type": "integer"
-          },
-          "verse_key": {
+          "text": {
             "type": "string"
+          },
+          "verses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Verse"
+            }
           },
           "chapter": {
             "type": "string",
             "format": "uri",
             "readOnly": true
           },
-          "juz": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "hizb": {
-            "type": "string",
-            "format": "uri",
-            "readOnly": true
-          },
-          "rub": {
+          "intro": {
             "type": "string",
             "format": "uri",
             "readOnly": true
@@ -1396,12 +1881,39 @@
         "required": [
           "detail",
           "id",
-          "verse_number",
-          "verse_key",
+          "text",
+          "verses",
           "chapter",
-          "juz",
-          "hizb",
-          "rub"
+          "intro"
+        ]
+      },
+      "Intro": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "text": {
+            "type": "string"
+          },
+          "tafseers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tafseer"
+            }
+          }
+        },
+        "required": [
+          "detail",
+          "id",
+          "text",
+          "tafseers"
         ]
       },
       "PaginatedHizbList": {
@@ -1535,6 +2047,60 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Verse"
+            }
+          }
+        }
+      },
+      "PaginatedTafseerList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/tafseer/text/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/tafseer/text/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tafseer"
+            }
+          }
+        }
+      },
+      "PaginatedIntroList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 123
+          },
+          "next": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/tafseer/intro/?page=4"
+          },
+          "previous": {
+            "type": "string",
+            "nullable": true,
+            "format": "uri",
+            "example": "http://api.example.org/api/tafseer/intro/?page=2"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Intro"
             }
           }
         }
