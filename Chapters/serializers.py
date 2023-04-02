@@ -20,4 +20,4 @@ class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chapter
         fields = ['detail', 'id', 'surah_number', 'name', 'verse_count', 'verses', 'tafseers',
-                  'revelation_place', 'revelation_order', 'translated_name']
+                  'revelation_place', 'revelation_order', 'translated_name', 'Intro']

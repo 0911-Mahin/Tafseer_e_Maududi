@@ -17,3 +17,6 @@ class Verse(models.Model):
         Hizb, on_delete=models.CASCADE, related_name='verses')
     rub = models.ForeignKey(
         Rub, on_delete=models.CASCADE, related_name='verses')
+    recitation = models.FileField()
+    translation = models.CharField(max_length=100000)
+    ayah = models.CharField(max_length=200)
