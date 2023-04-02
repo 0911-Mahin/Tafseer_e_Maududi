@@ -72,7 +72,7 @@ REST_FRAMEWORK = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': BASE_DIR / 'Cache/'
+        'LOCATION': 'E:/Computer_Science_Studies/Python/Python_Web_Projects/Django/Tafseer_e_Maududi/Cache/'
     }
 }
 

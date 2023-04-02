@@ -1,4 +1,3 @@
-from django.http import FileResponse
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -16,11 +15,6 @@ class VerseViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'verse_number'
     queryset = Verse.objects.all()
     serializer_class = VerseSerializer
-
-    @action(detail=True, methods=['get'])
-    def recitation(self, request, verse_number):
-        verse = self.get_object()
-        return FileResponse(verse.recitation.open())
 
     @action(detail=False, methods=['get'], url_path=r'by_chapter/(?P<chapter_number>\d+)')
     def by_chapter(self, request, chapter_number):

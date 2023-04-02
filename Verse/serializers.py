@@ -11,11 +11,6 @@ class VerseSerializer(serializers.ModelSerializer):
     juz = serializers.SerializerMethodField('get_juz')
     hizb = serializers.SerializerMethodField('get_hizb')
     rub = serializers.SerializerMethodField('get_rub')
-    recitation = serializers.SerializerMethodField('get_recitation_url')
-
-    def get_recitation_url(self, verse):
-        request = self.context.get('request')
-        return request.build_absolute_uri(reverse('verse-recitation', kwargs={'verse_number': verse.id}))
 
     def get_chapter(self, verse):
         request = self.context.get('request')
@@ -36,4 +31,4 @@ class VerseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Verse
         fields = ['detail', 'id', 'verse_number',
-                  'verse_key', 'chapter', 'juz', 'hizb', 'rub', 'translation', 'recitation', 'ayah']
+                  'verse_key', 'chapter', 'juz', 'hizb', 'rub']
